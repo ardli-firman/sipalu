@@ -13,6 +13,14 @@ function getAll()
     return $res;
 }
 
+function getAlumni()
+{
+    global $koneksi;
+
+    $alumni = $koneksi->query(dbGet('users') . ' INNER JOIN alumni ON users.id_user = alumni.user_id')->fetchAll();
+    return $alumni;
+}
+
 function updateStatusAkun($data = null)
 {
     global $koneksi;
@@ -24,11 +32,7 @@ function updateStatusAkun($data = null)
         $status = $data['no'];
     }
     $res->execute([$status, $data['id']]);
-    if ($res->rowCount() == 1) {
-        return true;
-        die;
-    }
-    return false;
+    return true;
 }
 
 function deleteAkun($id = null)

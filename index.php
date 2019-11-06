@@ -1,6 +1,8 @@
 <?php
+session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . 'config/Koneksi.php';
-$sesi = 'admin' ?>
+@$sesi = $_SESSION['user']->role;
+?>
 <!DOCTYPE html>
 <html lang="en">
 

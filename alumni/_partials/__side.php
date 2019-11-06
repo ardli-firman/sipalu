@@ -82,11 +82,6 @@ if (isset($_GET['signout'])) {
                         </a>
                     </li>
                     <li>
-                        <a href="?menu=user">
-                            <i class="fa fa-users"></i> <span>User</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="?menu=diskusi">
                             <i class="fa fa-comments-o"></i> <span>Diskusi</span>
                         </a>
@@ -94,11 +89,6 @@ if (isset($_GET['signout'])) {
                     <li>
                         <a href="?menu=berita">
                             <i class="fa fa-link"></i> <span>Berita</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="?menu=alumni">
-                            <i class="fa fa-user"></i> <span>Alumni</span>
                         </a>
                     </li>
                 </ul>

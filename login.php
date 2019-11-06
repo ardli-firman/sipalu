@@ -1,3 +1,20 @@
+<?php
+if (isset($_POST['submit'])) {
+    $res = $koneksi->query(dbGetWhere('users', ['username' => $_POST['username']]))->fetch();
+    if ($res === false) {
+        $message = "Username tidak ada";
+        echo $message;
+    } else {
+        if (md5($_POST['password']) != $res->password) {
+            $message = "password salah";
+            echo $message;
+        } else {
+            $_SESSION['user'] = $res;
+            echo "<script>location.reload()</script>";
+        }
+    }
+}
+?>
 <div class="row">
     <div class="login-box">
         <div class="login-logo">
@@ -22,10 +39,10 @@
     </div>
 </div>
 <script>
-    $(function() {
-        $('#form-login').submit(function(e) {
-            e.preventDefault();
-            $.ajax({});
-        })
-    })
+    // $(function() {
+    //     $('#form-login').submit(function(e) {
+    //         e.preventDefault();
+    //         $.ajax({});
+    //     })
+    // })
 </script>

@@ -7,9 +7,9 @@ function dbGet($table = null)
     return $res;
 }
 
-function dbGetWhere($table = null, $row = null, $result = null)
+function dbGetWhere($table = null, $where = [])
 {
-    $res = "SELECT * FROM $table WHERE $row='$result'";
+    $res = "SELECT * FROM $table WHERE " . array_keys($where)[0] . "= '" . $where[array_keys($where)[0]] . "'";
     return $res;
 }
 

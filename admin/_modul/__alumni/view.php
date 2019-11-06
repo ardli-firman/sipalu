@@ -1,5 +1,5 @@
 <?php
-$alumnis = getAll('alumni');
+$alumnis = getAlumni('alumni');
 ?>
 <div class="box box-info">
     <div class="box-header with-border">
@@ -8,9 +8,9 @@ $alumnis = getAll('alumni');
                 <?= $message ?>
             </div>
         <?php endif; ?>
-        <h3 class="box-title"> <i class="fa fa-users"></i> Data User</h3>
+        <h3 class="box-title"> <i class="fa fa-users"></i> Data Alumni</h3>
         <span style="float:right;">
-            <a class="btn btn-primary" href="?menu=user&aksi=tambah"><i class="fa fa-plus"></i> Admin</a>
+            <a class="btn btn-primary" href="?menu=alumni&aksi=cetak"><i class="fa fa-print"></i> Cetak Data</a>
         </span>
     </div>
     <div class="box-body table-responsive">
@@ -23,7 +23,7 @@ $alumnis = getAll('alumni');
                     <th>ANGKATAN</th>
                     <th>NO HP</th>
                     <th>EMAIL</th>
-                    <th>AKSI</th>
+                    <th>ALAMAT</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,10 +38,7 @@ $alumnis = getAll('alumni');
                             <td><?= $alumni->no_hp ?></td>
                             <td><?= $alumni->email ?></td>
                             <td>
-                                <button data-foto="<?= $alumni->foto_ijazah ?>" data-angkatan="<?= $alumni->angkatan ?>" data-id="<?= $alumni->id_user ?>" data-nama="<?= $alumni->nama ?>" data-toggle="modal" data-target="#modal-edit" id="btn-edit" class="btn btn-xs bg-primary"><i class="fa fa-edit"></i>Edit</button>
-                                <form method="post" action="">
-                                    <button onclick="return confirm('Hapus ?')" id="btn-hapus" class="btn btn-xs bg-red" type="submit" name="hapus" value="<?= $alumni->id_user ?>"><i class="fa fa-trash"></i>Hapus</button>
-                                </form>
+                                <?= $alumni->alamat ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

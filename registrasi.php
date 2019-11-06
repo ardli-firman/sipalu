@@ -62,6 +62,9 @@ if (isset($_POST['daftar'])) {
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="No Hp" name="no_hp">
             </div>
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Alamat" name="alamat"></textarea>
+            </div>
             <div class="row">
                 <div class="col-xs-6">
                     <div class="form-group">

@@ -172,16 +172,13 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url(); ?>assets/theme/dist/js/demo.js"></script>
 <!-- CK Editor -->
-<script src="<?php echo base_url(); ?>assets/theme/bower_components/ckeditor/ckeditor.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?php echo base_url(); ?>assets/theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <script>
     $(function() {
         // Replace the <textarea id="editor1"> with a CKEditor
-        CKEDITOR.replace('editor1')
-        CKEDITOR.replace('editor2')
         //bootstrap WYSIHTML5 - text editor
-        $('.textarea2').wysihtml5()
+        $('#editor-post').wysihtml5()
     })
 </script>
 <!--upload gambar-->

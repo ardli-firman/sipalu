@@ -13,11 +13,11 @@ function doRegist($data)
 
         $userId = $koneksi->lastInsertId();
         $stmt = null;
-        $stmt = $koneksi->prepare(dbInsert('alumni', ['user_id', 'nim', 'nama', 'email', 'tgl_lahir', 'jurusan', 'angkatan', 'pekerjaan', 'no_hp', 'foto_ijazah', 'foto']));
+        $stmt = $koneksi->prepare(dbInsert('alumni', ['user_id', 'nim', 'nama', 'email', 'tgl_lahir', 'jurusan', 'angkatan', 'pekerjaan', 'no_hp', 'alamat', 'foto_ijazah', 'foto']));
         if (@$_FILES['foto_ijazah']['error'] !== 4) {
             $foto = upload(@$_FILES['foto_ijazah'], 'alumni/ijazah');
             if ($foto != false) {
-                $stmt->execute([$userId, @$data['nim'], @$data['nama'], @$data['email'], @$data['tgl_lahir'], @$data['jurusan'], @$data['angkatan'], @$data['pekerjaan'], @$data['no_hp'], $foto, 'avatar.png']);
+                $stmt->execute([$userId, @$data['nim'], @$data['nama'], @$data['email'], @$data['tgl_lahir'], @$data['jurusan'], @$data['angkatan'], @$data['pekerjaan'], @$data['no_hp'], @$data['alamat'], $foto, 'avatar.png']);
                 return $stmt->rowCount();
             } else {
                 return 'Error gambar';
