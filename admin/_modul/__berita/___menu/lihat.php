@@ -21,7 +21,7 @@ if (isset($_POST['post'])) {
                 <?= $message ?>
             </div>
         <?php endif; ?>
-        <h3 class="box-title"> <i class="fa fa-file"></i> Tambah postingan</h3>
+        <h3 class="box-title"> <i class="fa fa-file"></i> Lihat postingan</h3>
     </div>
     <div class="box-body">
         <form action="" method="post">
@@ -29,6 +29,10 @@ if (isset($_POST['post'])) {
             <div class="form-group">
                 <label for="judul">Judul</label>
                 <input type="text" name="judul" class="form-control" value="<?= $artikel->judul ?>">
+            </div>
+            <div class="form-group">
+                <label for="sampul">Sampul</label>
+                <img src="assets/foto/berita/sampul/<?= $artikel->sampul ?>" alt="" class="img-responsive" width="500px" height="300px">
             </div>
             <div class="form-group">
                 <label for="jenis">Jenis postingan</label>

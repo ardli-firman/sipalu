@@ -1,6 +1,4 @@
 <?php require_once '_partials/__side.php'; ?>
-<?php require_once '_modul/__user/FunUser.php'; ?>
-<?php require_once '_modul/__berita/FunBerita.php'; ?>
 <?php $modul = @$_GET['menu']; ?>
 <?php $aksi = @$_GET['aksi']; ?>
 <div class="content-wrapper">
@@ -8,38 +6,27 @@
     <section class="content">
         <?php
         switch ($modul) {
-            case 'user':
+            case 'loker':
                 switch ($aksi) {
                     case 'tambah':
                         require_once '_modul/__user/___menu/tambah.php';
                         break;
                     default:
-                        require_once '_modul/__user/view.php';
+                        require_once '_modul/__loker/view.php';
                         break;
                 }
                 break;
-            case 'alumni':
-                switch ($aksi) {
-                    case 'cetak':
-                        require_once '_modul/__alumni/___menu/cetak.php';
-                        break;
-
-                    default:
-                        require_once '_modul/__alumni/view.php';
-                        break;
-                }
-                break;
-            case 'berita':
+            case 'artikel':
                 switch ($aksi) {
                     case 'tambah':
-                        require_once '_modul/__berita/___menu/tambah.php';
+                        require_once '_modul/__artikel/___menu/tambah.php';
                         break;
                     case 'lihat':
-                        require_once '_modul/__berita/___menu/lihat.php';
+                        require_once '_modul/__artikel/___menu/lihat.php';
                         break;
 
                     default:
-                        require_once '_modul/__berita/view.php';
+                        require_once '_modul/__artikel/view.php';
                         break;
                 }
                 break;

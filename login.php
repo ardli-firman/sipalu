@@ -5,12 +5,15 @@ if (isset($_POST['submit'])) {
         $message = "Username tidak ada";
         echo $message;
     } else {
+        $user = $koneksi->query(dbGetWhere($res->role, ['user_id' => $res->id_user]))->fetch();
+        $user->role = $res->role;
         if (md5($_POST['password']) != $res->password) {
             $message = "password salah";
             echo $message;
         } else {
-            $_SESSION['user'] = $res;
+            $_SESSION['user'] = $user;
             echo "<script>location.reload()</script>";
+            die;
         }
     }
 }

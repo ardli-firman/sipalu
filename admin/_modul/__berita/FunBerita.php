@@ -1,6 +1,8 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . 'helper/database_helper.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . 'helper/upload_helper.php';
+
 
 function getAllArtikel()
 {
@@ -25,12 +27,19 @@ function insertPostingan($data = null)
     global $koneksi;
 
     $idUser = 30;
-    $stmt = $koneksi->prepare(dbInsert('artikel', ['user_id', 'judul', 'isi', 'jenis', 'status_artikel', 'tanggal']));
+    $stmt = $koneksi->prepare(dbInsert('artikel', ['user_id', 'judul', 'isi', 'jenis', 'sampul', 'status_artikel', 'tanggal']));
     try {
-        $stmt->execute([$idUser, @$data['judul'], @$data['isi'], @$data['jenis'], 'menunggu', date('Y-m-d')]);
-        if ($stmt->rowCount() == 1) {
-            return true;
-            die;
+        if (@$_FILES['sampul']['error'] !== 4) {
+            $foto = upload(@$_FILES['sampul'], 'berita/sampul');
+        } else {
+            $foto = 'sampul.jpg';
+        }
+        if ($foto != false) {
+            $stmt->execute([$idUser, @$data['judul'], @$data['isi'], @$data['jenis'], $foto, 'menunggu', date('Y-m-d')]);
+            if ($stmt->rowCount() == 1) {
+                return true;
+                die;
+            }
         }
         return false;
     } catch (PDOException $th) {

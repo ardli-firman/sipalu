@@ -21,7 +21,7 @@ if (isset($_POST['post'])) {
         <h3 class="box-title"> <i class="fa fa-file"></i> Tambah postingan</h3>
     </div>
     <div class="box-body">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="judul">Judul</label>
                 <input type="text" name="judul" class="form-control">
@@ -33,6 +33,11 @@ if (isset($_POST['post'])) {
                     <option value="artikel">Artikel</option>
                     <option value="berita">Berita</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="sampul">Sampul</label>
+                <input type="file" name="sampul" class="form-control">
+                <code>kosongkan jika tidak ada</code>
             </div>
             <div class="box-body pad">
                 <label for="isi">Isi</label>
