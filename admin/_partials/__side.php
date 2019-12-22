@@ -1,9 +1,19 @@
 <?php
+require_once base_server() . 'helper/database_helper.php';
 $user = $_SESSION['user'];
 if (isset($_GET['signout'])) {
     $_SESSION = [];
     echo "<script>location.reload()</script>";
 }
+
+if (isset($_POST['simpanProfile'])) {
+    $userId = updateProfile($_POST, $_FILES['foto'], 'admin');
+    $_SESSION = [];
+    $res = $koneksi->query(dbGetWhere('admin', ['user_id' => $userId]))->fetch();
+    $res->role = 'admin';
+    $_SESSION['user'] = $res;
+}
+
 ?>
 
 <body class="hold-transition skin-blue sidebar-mini fixed skin-green">
@@ -30,13 +40,13 @@ if (isset($_GET['signout'])) {
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?php echo base_url(); ?>assets/foto/alumni/profile/avatar.png" class="user-image" alt="User Image">
+                                <img src="assets/foto/admin/profile/<?= $user->foto ?>" class="user-image" alt="User Image">
                                 <span class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="<?php echo base_url(); ?>assets/foto/alumni/profile/avatar.png" class="img-circle" alt="User Image">
+                                    <img src="assets/foto/admin/profile/<?= $user->foto ?>" class="img-circle" alt="User Image">
 
                                     <p>
                                         <?= $user->nama ?>
@@ -65,7 +75,7 @@ if (isset($_GET['signout'])) {
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="<?php echo base_url(); ?>assets/foto/alumni/profile/avatar.png" class="img-circle" alt="User Image">
+                        <img src="assets/foto/admin/profile/<?= $user->foto ?>" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <!-- Nama -->
@@ -116,7 +126,7 @@ if (isset($_GET['signout'])) {
                 </div>
                 <div class="modal-body">
                     <div class="form-group text-center">
-                        <img src="assets/foto/alumni/profile/avatar.png" alt="" class="img-circle">
+                        <img src="assets/foto/admin/profile/<?= $user->foto ?>" alt="" class="img-circle">
                     </div>
                     <form method="post" action="" enctype="multipart/form-data" id="form-registrasi">
                         <div class="row">

@@ -2,7 +2,7 @@
 <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
 <!-- ./wrapper -->
-
+<script src="<?= base_url(); ?>assets/js/chat.js"></script>
 <!-- jQuery 3 -->
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url(); ?>assets/theme/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

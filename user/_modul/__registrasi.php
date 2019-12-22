@@ -1,6 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . 'helper/database_helper.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . 'helper/upload_helper.php';
+require_once base_server() . 'helper/database_helper.php';
+require_once base_server() . 'helper/upload_helper.php';
 
 
 function doRegist($data)

@@ -1,8 +1,17 @@
 <?php
+require_once base_server() . 'helper/database_helper.php';
+require_once base_server() . 'helper/upload_helper.php';
 $user = $_SESSION['user'];
 if (isset($_GET['signout'])) {
     $_SESSION = [];
     echo "<script>location.reload()</script>";
+}
+if (isset($_POST['simpanProfile'])) {
+    $userId = updateProfile($_POST, $_FILES['foto'], 'alumni');
+    $_SESSION = [];
+    $res = $koneksi->query(dbGetWhere('alumni', ['user_id' => $userId]))->fetch();
+    $res->role = 'alumni';
+    $_SESSION['user'] = $res;
 }
 ?>
 
@@ -87,14 +96,34 @@ if (isset($_GET['signout'])) {
                             <i class="fa fa-comments-o"></i> <span>Diskusi</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="?menu=artikel">
-                            <i class="fa fa-file"></i> <span>Artikel</span>
+                    <li class="active treeview menu-open" data-widget="tree">
+                        <a href="">
+                            <i class="fa fa-file"></i> <span>Postingan</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="?menu=artikel&jenis=berita">
+                                    <i class="fa fa-file"></i> <span>Berita</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?menu=artikel&jenis=artikel">
+                                    <i class="fa fa-file"></i> <span>Artikel</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?menu=artikel&jenis=loker">
+                                    <i class="fa fa-file"></i> <span>Loker</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="?menu=loker">
-                            <i class="fa fa-link"></i> <span>Loker</span>
+                        <a href="?menu=posting">
+                            <i class="fa fa-book"></i> <span>Postingan saya</span>
                         </a>
                     </li>
                 </ul>
@@ -117,11 +146,13 @@ if (isset($_GET['signout'])) {
                         <div class="row">
                             <div class="col-xs-4">
                                 <div class="form-group">
+                                    <label for="nim">Nim</label>
                                     <input type="text" class="form-control" placeholder="NIM" name="nim" value="<?= $user->nim ?>">
                                 </div>
                             </div>
                             <div class="col-xs-8">
                                 <div class="form-group">
+                                    <label for="nama">Nama</label>
                                     <input type="text" class="form-control" placeholder="Nama" name="nama" value="<?= $user->nama ?>">
                                 </div>
                             </div>
@@ -129,34 +160,41 @@ if (isset($_GET['signout'])) {
                         <div class="row">
                             <div class="col-xs-7">
                                 <div class="form-group">
+                                    <label for="email">Email</label>
                                     <input type="email" class="form-control" placeholder="Email" name="email" value="<?= $user->email ?>">
                                 </div>
                             </div>
                             <div class="col-xs-5">
                                 <div class="form-group">
+                                    <label for="tgl_lahir">Tanggal Lahir</label>
                                     <input type="text" class="form-control" placeholder="Tanggal Lahir" name="tgl_lahir" id="datepicker" value="<?= $user->tgl_lahir ?>">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="jurusan">Jurusan</label>
                             <input type="text" class="form-control" placeholder="Jurusan" name="jurusan" value="<?= $user->jurusan ?>">
                         </div>
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
+                                    <label for="Angkatan">Angkatan</label>
                                     <input type="text" class="form-control" placeholder="Angkatan" name="angkatan" value="<?= $user->angkatan ?>">
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
+                                    <label for="pekerjaan">Pekerjaan</label>
                                     <input type="text" class="form-control" placeholder="Pekerjaan" name="pekerjaan" value="<?= $user->pekerjaan ?>">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="no_hp">No hp</label>
                             <input type="text" class="form-control" placeholder="No Hp" name="no_hp" value="<?= $user->no_hp ?>">
                         </div>
                         <div class="form-group">
+                            <label for="alamat">Alamant</label>
                             <textarea class="form-control" placeholder="Alamat" name="alamat"><?= $user->alamat ?></textarea>
                         </div>
                         <div class="form-group">

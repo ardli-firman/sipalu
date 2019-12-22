@@ -5,9 +5,11 @@ if (isset($_POST['hapus'])) {
     $res = deleteArtikel($_POST['hapus']);
     if ($res === true) {
         $message = "Berhasil dihapus";
+        $artikels = getAllArtikel();
         $res = null;
     } else {
         $message = $res;
+        $artikels = getAllArtikel();
         $res = null;
     }
 }

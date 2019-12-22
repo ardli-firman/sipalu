@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST['tambah'])) {
-    $res = insertAdmin($_POST);
+    $res = insertAdmin($_POST, $_FILES['foto']);
     if ($res) {
         $message = "Berhasil";
     } else if ($res == false) {
@@ -21,7 +21,7 @@ if (isset($_POST['tambah'])) {
         <h3 class="box-title"> <i class="fa fa-user"></i> Tambah admin</h3>
     </div>
     <div class="box-body">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" name="username" class="form-control">
@@ -41,6 +41,10 @@ if (isset($_POST['tambah'])) {
             <div class="form-group">
                 <label for="no_hp">No HP</label>
                 <input type="text" name="no_hp" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="foto">Foto</label>
+                <input type="file" name="foto" id="foto">
             </div>
             <div class="form-group">
                 <input type="submit" value="Tambah" name="tambah" class="btn btn-primary">

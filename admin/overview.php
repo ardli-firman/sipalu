@@ -1,6 +1,7 @@
-<?php require_once '_partials/__side.php'; ?>
 <?php require_once '_modul/__user/FunUser.php'; ?>
 <?php require_once '_modul/__berita/FunBerita.php'; ?>
+<?php require_once '_modul/__diskusi/FunDiskusi.php'; ?>
+<?php require_once '_partials/__side.php'; ?>
 <?php $modul = @$_GET['menu']; ?>
 <?php $aksi = @$_GET['aksi']; ?>
 <div class="content-wrapper">
@@ -59,5 +60,6 @@
                 break;
         } ?>
     </section>
+
 </div>
 <?php require_once '_partials/__footer.php' ?>

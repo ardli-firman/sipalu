@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . 'config/Koneksi.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/sipalu/helper/url_helper.php';
+require_once base_server() . 'config/Koneksi.php';
 @$sesi = $_SESSION['user']->role;
 ?>
 <!DOCTYPE html>

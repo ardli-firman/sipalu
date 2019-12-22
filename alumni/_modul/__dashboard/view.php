@@ -1,9 +1,15 @@
+<?php
+
+$artikels = getAllArtikelByJenis('artikel', "LIMIT 5");
+
+?>
+
 <section class="content">
     <div class="row">
         <div class="col-xs-3">
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>3</h3>
+                    <h3><?= sizeof(getAlumni()) ?></h3>
 
                     <p>Alumni</p>
                 </div>
@@ -27,36 +33,46 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <ul class="products-list product-list-in-box">
-                        <li class="item">
-                            <div class="product-info">
-                                <a href="javascript:void(0)" class="product-title">Buka bersama alumni angkatan 2019</a>
-                            </div>
-                        </li>
+                        <?php foreach ($artikels as $artikel) : ?>
+                            <li class="item">
+                                <div class="product-img">
+                                    <img src="assets/foto/berita/sampul/<?= $artikel->sampul ?>" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <a href="?menu=artikel&aksi=lihat&id=<?= $artikel->id_artikel ?>" class="product-title"><?= $artikel->judul ?>
+                                        <span class="label label-warning pull-right"><?= $artikel->tanggal ?></span>
+                                    </a>
+                                    <span style="font-size: 12px ; margin-top: 5px" class="product-description">
+                                        <?= strip_tags($artikel->isi) ?>
+                                    </span>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
                         <!-- /.item -->
-                        <li class="item">
+                        <!-- <li class="item">
                             <div class="product-info">
                                 <a href="javascript:void(0)" class="product-title">Buka bersama alumni angkatan 2018</a>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- /.item -->
-                        <li class="item">
+                        <!-- <li class="item">
                             <div class="product-info">
                                 <a href="javascript:void(0)" class="product-title">Acara Buka bersama alumni angkatan 2017</a>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- /.item -->
-                        <li class="item">
+                        <!-- <li class="item">
                             <div class="product-info">
                                 <a href="javascript:void(0)" class="product-title">Acara Buka bersama alumni angkatan 2016</a>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- /.item -->
                     </ul>
                 </div>
                 <!-- /.box-body -->
-                <div class="box-footer text-center">
+                <!-- <div class="box-footer text-center">
                     <a href="?menu=berita" class="uppercase">Lihat semua artikel</a>
-                </div>
+                </div> -->
                 <!-- /.box-footer -->
             </div>
         </div>
