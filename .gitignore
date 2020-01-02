@@ -2,3 +2,5 @@ assets/foto/alumni/ijazah/*
 assets/foto/berita/sampul/*
 assets/foto/admin/profile/*
 assets/foto/alumni/profile/*
+vendor/*
+composer.lock

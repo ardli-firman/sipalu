@@ -2,25 +2,25 @@
 if (isset($_POST['submit'])) {
     $res = $koneksi->query(dbGetWhere('users', ['username' => $_POST['username']]))->fetch();
     if ($res === false) {
-        $message = "Username tidak ada";
+        $_SESSION['flash'] = "Username tidak ada";
     } else {
-        $status = $koneksi->query("SELECT status_user FROM users WHERE id_user=$res->id_user AND status_user='aktif'")->fetch();
+        $status = $koneksi->query("SELECT status_user FROM users WHERE id_user=$res->id_user AND status_user='aktif' AND deleted='0'")->fetch();
         if ($status) {
             $user = $koneksi->query(dbGetWhere($res->role, ['user_id' => $res->id_user]))->fetch();
             $user->role = $res->role;
             if (md5($_POST['password']) != $res->password) {
-                $message = "password salah";
+                $_SESSION['flash'] = "password salah";
             } else {
                 $stmt = $koneksi->prepare(dbUpdate('users', ['last_login'], 'id_user'));
                 $timestamp = date('Y-m-d H:i:s');
                 if ($stmt->execute([$timestamp, $res->id_user])) {
                     $_SESSION['user'] = $user;
-                    echo "<script>location.reload()</script>";
+                    echo "<script>location.href= './'</script>";
                     die;
                 }
             }
         } else {
-            $message = "Akun anda belum aktif, silahkan tunggu email";
+            $_SESSION['flash'] = "Email / Password salah";
         }
     }
 }
@@ -31,11 +31,12 @@ if (isset($_POST['submit'])) {
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <?php if (@$message != null) : ?>
-                <div class="alert alert-danger">
-                    <?= $message ?>
+            <?php if (@$_SESSION['flash'] != null) : ?>
+                <div class="alert alert-info">
+                    <?= $_SESSION['flash'] ?>
                 </div>
-            <?php endif; ?>
+            <?php endif;
+            unset($_SESSION['flash']) ?>
             <p class="login-box-msg" style="font-size:100%;">Masukkan Username dan Password</p>
             <form action="" method="post" id="form-login">
                 <div class="form-group has-feedback">
@@ -49,6 +50,9 @@ if (isset($_POST['submit'])) {
                 <button type="submit" name="submit" class="btn btn-lg btn-success btn-block btn-flat" style="font-size: 15px;">Login <i class="glyphicon glyphicon-log-in"></i></button>
             </form>
             <br>
+            <p class="text-center">
+                <a href="?menu=lupa-password">Lupa password ?</a>
+            </p>
         </div>
         <!-- /.login-box-body -->-
     </div>

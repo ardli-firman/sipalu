@@ -1,7 +1,9 @@
 <?php
-session_start();
+date_default_timezone_set('Asia/jakarta');
+@session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/sipalu/helper/url_helper.php';
 require_once base_server() . 'config/Koneksi.php';
+require_once 'helper/log_helper.php';
 @$sesi = $_SESSION['user']->role;
 ?>
 <!DOCTYPE html>

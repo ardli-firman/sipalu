@@ -1,7 +1,13 @@
 <?php
+date_default_timezone_set('Asia/jakarta');
+@session_start();
 require_once 'config/Koneksi.php';
+require_once 'helper/url_helper.php';
 require_once 'helper/database_helper.php';
-@$menu = $_GET['menu']; ?>
+require_once 'helper/log_helper.php';
+@$menu = $_GET['menu'];
+@$extended = $_GET['do'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +29,7 @@ require_once 'helper/database_helper.php';
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="../">Home <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="./">Home <span class="sr-only">(current)</span></a></li>
                     </ul>
                 </div>
                 <div class="navbar-custom-menu">
@@ -48,6 +54,12 @@ require_once 'helper/database_helper.php';
             break;
         case 'login':
             require_once 'login.php';
+            break;
+        case 'lupa-password':
+            require_once 'lupa_password.php';
+            break;
+        case 'verifikasi':
+            require_once 'verifikasi.php';
             break;
         default:
             require_once 'welcome.php';
