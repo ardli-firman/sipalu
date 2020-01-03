@@ -27,7 +27,7 @@ function sendEmail($data = [], $konten)
         $mail->Port       = 587;
         $mail->Host       = "smtp.gmail.com";
         $mail->Username   = "ardlifirman17@gmail.com";
-        $mail->Password   = "ardli Firman1234";
+        $mail->Password   = "-";
 
         $mail->IsHTML(true);
         $mail->AddAddress($data['email'], $data['nama']);
