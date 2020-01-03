@@ -2,5 +2,6 @@ assets/foto/alumni/ijazah/*
 assets/foto/berita/sampul/*
 assets/foto/admin/profile/*
 assets/foto/alumni/profile/*
+helper/email_helper.php
 vendor/*
 composer.lock
