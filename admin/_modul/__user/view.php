@@ -4,33 +4,42 @@ $users = getAll();
 if (@$_POST['yes'] != null || @$_POST['no'] != null) {
     $res = updateStatusAkun($_POST);
     if ($res === true) {
-        $message = "Berhasil diubah";
-        $res = null;
+        $_SESSION['flash'] = "Berhasil diubah";
+        myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => 'Berhasil mengubah status akun ' . $_POST['id']]);
+        echo "<script>location.href = '?menu=user'</script>";
+        die;
     } else {
-        $message = $res;
-        $res = null;
+        $_SESSION['flash'] = $res;
+        myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => 'Gagal mengubah status akun ' . $_POST['id']]);
+        echo "<script>location.href = '?menu=user'</script>";
+        die;
     }
 }
 
 if (isset($_POST['hapus'])) {
     $res = deleteAkun($_POST['hapus']);
     if ($res === true) {
-        $message = "Berhasil dihapus";
-        $res = null;
+        $_SESSION['flash'] = "Berhasil dihapus";
+        myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => 'Berhasil menghapus akun ' . $_POST['hapus']]);
+        echo "<script>location.href = '?menu=user'</script>";
+        die;
     } else {
-        $message = $res;
-        $res = null;
+        $_SESSION['flash'] = $res;
+        myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => 'Gagal menghapus akun ' . $_POST['hapus']]);
+        echo "<script>location.href = '?menu=user'</script>";
+        die;
     }
 }
 
 ?>
 <div class="box box-info">
     <div class="box-header with-border">
-        <?php if (isset($message)) : ?>
+        <?php if (isset($_SESSION['flash'])) : ?>
             <div class="alert alert-info">
-                <?= $message ?>
+                <?= $_SESSION['flash'] ?>
             </div>
-        <?php endif; ?>
+        <?php endif;
+        unset($_SESSION['flash']) ?>
         <h3 class="box-title"> <i class="fa fa-users"></i> Data User</h3>
         <span style="float:right;">
             <a class="btn btn-primary" href="?menu=user&aksi=tambah"><i class="fa fa-plus"></i> Admin</a>
@@ -50,7 +59,7 @@ if (isset($_POST['hapus'])) {
             <tbody>
                 <?php if ($users != false) : ?>
                     <?php $i = 0;
-                        foreach ($users as $user) : ?>
+                    foreach ($users as $user) : ?>
                         <tr>
                             <td><?= ++$i ?></td>
                             <td><?= $user->username ?></td>

@@ -55,6 +55,13 @@
                         break;
                 }
                 break;
+            case 'akun':
+                switch ($aksi) {
+                    default:
+                        require_once '_modul/__akun/view.php';
+                        break;
+                }
+                break;
             default:
                 require_once '_modul/__dashboard/view.php';
                 break;

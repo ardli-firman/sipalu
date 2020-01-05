@@ -15,13 +15,13 @@ if (isset($_POST['submit'])) {
                 $timestamp = date('Y-m-d H:i:s');
                 if ($stmt->execute([$timestamp, $res->id_user])) {
                     $_SESSION['user'] = $user;
-                    myLog(['id' => $res->id_user, 'aktifitas' => 'Berhasil login']);
+                    myLog(['id' => $res->id_user, 'aktivitas' => 'Berhasil login']);
                     echo "<script>location.href= './'</script>";
                     die;
                 }
             }
         } else {
-            $_SESSION['flash'] = "Email / Password salah";
+            $_SESSION['flash'] = "Email / Password salah / Email belum diverifikasi";
         }
     }
 }

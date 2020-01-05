@@ -3,6 +3,7 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/sipalu/helper/url_helper.php';
 require_once base_server() . 'config/Koneksi.php';
 require_once base_server() . 'helper/database_helper.php';
+require_once base_server() . 'helper/log_helper.php';
 
 function postChat($data = [])
 {
@@ -17,4 +18,5 @@ function postChat($data = [])
 
 if (isset($_POST)) {
     postChat($_POST);
+    myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => 'Menambahkan chat']);
 }

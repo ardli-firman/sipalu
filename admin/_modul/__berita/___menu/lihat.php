@@ -6,12 +6,14 @@ if (isset($_GET['id'])) {
 if (isset($_POST['post'])) {
     $res = updateStatusArtikel($_POST);
     if ($res) {
-        $message = "Berhasil diedit";
+        $message = "Berhasil mengedit status postingan";
     } else if ($res == false) {
-        $message = "Gagal diedit";
+        $message = "Gagal mengedit status postingan";
     } else {
         $message = $res;
     }
+    myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => $message]);
+
 }
 ?>
 <div class="box box-success">

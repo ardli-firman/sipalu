@@ -1,5 +1,6 @@
 <?php
 $alumnis = getAlumni('alumni');
+myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => 'Mencetak dokumen alumni']);
 ?>
 <table class="table">
     <thead>
@@ -16,7 +17,7 @@ $alumnis = getAlumni('alumni');
     <tbody>
         <?php if ($alumnis != false) : ?>
             <?php $i = 0;
-                foreach ($alumnis as $alumni) : ?>
+            foreach ($alumnis as $alumni) : ?>
                 <tr>
                     <td><?= ++$i ?></td>
                     <td><?= $alumni->nama ?></td>
@@ -33,4 +34,4 @@ $alumnis = getAlumni('alumni');
 
 <?php
 
-echo "<script>window.print(); setTimeout(function(){window.history.back()},3000)</script>";
+echo "<script>window.print(); setTimeout(function(){window.location.href='?menu=alumni'},3000)</script>";

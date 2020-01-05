@@ -5,11 +5,11 @@ $artikel = getArtikel($_GET['id']);
 if (isset($_POST['post'])) {
     $res = updateArtikel($_POST, $_GET['id']);
     if ($res) {
-        $message = "Berhasil diedit";
+        $message = "Berhasil mengedit postingan";
         $_SESSION['flash'] = $message;
         echo "<script>window.location.href = '?menu=posting'</script>";
     } else if ($res === false) {
-        $message = "Gagal diedit";
+        $message = "Gagal mengedit postingan";
         $_SESSION['flash'] = $message;
         echo "<script>window.location.href = '?menu=posting'</script>";
     } else {
@@ -17,6 +17,7 @@ if (isset($_POST['post'])) {
         $_SESSION['flash'] = $message;
         echo "<script>window.location.href = '?menu=posting'</script>";
     }
+    myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => $message]);
 }
 ?>
 <div class="box box-success">

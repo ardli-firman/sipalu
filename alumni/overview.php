@@ -56,6 +56,9 @@
                         break;
                 }
                 break;
+            case 'akun':
+                require_once '_modul/__akun/view.php';
+                break;
             default:
                 require_once '_modul/__dashboard/view.php';
                 break;

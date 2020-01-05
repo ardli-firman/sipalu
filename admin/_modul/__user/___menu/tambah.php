@@ -4,9 +4,11 @@ if (isset($_POST['tambah'])) {
     $res = insertAdmin($_POST, $_FILES['foto']);
     if ($res) {
         $message = "Berhasil";
+        myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => 'Berhasil menambah admin']);
     } else if ($res == false) {
         $message = "Gagal";
     } else {
+        myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => 'Gagal menambah admin']);
         $message = $res;
     }
 }

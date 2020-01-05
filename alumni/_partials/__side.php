@@ -3,6 +3,7 @@ require_once base_server() . 'helper/database_helper.php';
 require_once base_server() . 'helper/upload_helper.php';
 $user = $_SESSION['user'];
 if (isset($_GET['signout'])) {
+    myLog(['id' => $user->user_id, 'aktivitas' => 'Telah Logout']);
     $_SESSION = [];
     echo "<script>location.reload()</script>";
 }
@@ -12,6 +13,8 @@ if (isset($_POST['simpanProfile'])) {
     $res = $koneksi->query(dbGetWhere('alumni', ['user_id' => $userId]))->fetch();
     $res->role = 'alumni';
     $_SESSION['user'] = $res;
+    myLog(['id' => $userId, 'aktivitas' => 'Memperbaharui profile']);
+    echo "<script>location.href = '/sipalu/'</script";
 }
 ?>
 
@@ -120,11 +123,16 @@ if (isset($_POST['simpanProfile'])) {
                                 </a>
                             </li>
                         </ul>
-                    </li>
                     <li>
                         <a href="?menu=posting">
                             <i class="fa fa-book"></i> <span>Postingan saya</span>
                         </a>
+                    </li>
+                    <li>
+                        <a href="?menu=akun">
+                            <i class="fa fa-lock"></i> <span>Akun saya</span>
+                        </a>
+                    </li>
                     </li>
                 </ul>
             </section>

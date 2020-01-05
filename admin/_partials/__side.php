@@ -2,6 +2,7 @@
 require_once base_server() . 'helper/database_helper.php';
 $user = $_SESSION['user'];
 if (isset($_GET['signout'])) {
+    myLog(['id' => $user->user_id, 'aktivitas' => 'Telah Logout']);
     $_SESSION = [];
     echo "<script>location.reload()</script>";
 }
@@ -12,6 +13,8 @@ if (isset($_POST['simpanProfile'])) {
     $res = $koneksi->query(dbGetWhere('admin', ['user_id' => $userId]))->fetch();
     $res->role = 'admin';
     $_SESSION['user'] = $res;
+    myLog(['id' => $userId, 'aktivitas' => 'Memperbaharui profile']);
+    echo "<script>location.href = '/sipalu/'</script";
 }
 
 ?>
@@ -110,6 +113,11 @@ if (isset($_POST['simpanProfile'])) {
                     <li>
                         <a href="?menu=alumni">
                             <i class="fa fa-user"></i> <span>Alumni</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?menu=akun">
+                            <i class="fa fa-lock"></i><span>Akun saya</span>
                         </a>
                     </li>
                 </ul>

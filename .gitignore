@@ -3,5 +3,5 @@ assets/foto/berita/sampul/*
 assets/foto/admin/profile/*
 assets/foto/alumni/profile/*
 helper/email_helper.php
-vendor/*
-composer.lock
+# vendor/*
+# composer.lock

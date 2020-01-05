@@ -3,12 +3,13 @@
 if (isset($_POST['post'])) {
     $res = insertPostingan($_POST);
     if ($res) {
-        $message = "Berhasil ditambahkan";
+        $message = "Berhasil menambahkan postingan";
     } else if ($res == false) {
-        $message = "Gagal ditambahkan";
+        $message = "Gagal menambahkan postingan";
     } else {
         $message = $res;
     }
+    myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => $message]);
 }
 ?>
 <div class="box box-success">

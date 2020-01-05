@@ -33,6 +33,7 @@ if (isset($_POST['forgot-password'])) {
     $res = $koneksi->prepare(dbUpdate('users', ['password'], 'id_user'));
     $res->execute([$password, $id]);
     $_SESSION['flash'] = "Password berhasil diganti";
+    myLog(['id' => $id, 'aktivitas' => 'Mengganti password dengan email']);
     echo "<script>location.href= 'home.php?menu=login'</script>";
     die;
 }

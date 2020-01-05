@@ -50,7 +50,7 @@ function insertPostingan($data = null)
         $status_artikel = "diterima";
     }
 
-    $stmt = $koneksi->prepare(dbInsert('artikel', ['user_id', 'judul', 'isi', 'jenis', 'sampul', 'status_artikel', 'tanggal']));
+    $stmt = $koneksi->prepare(dbInsert('artikel', ['user_id', 'judul', 'isi', 'jenis', 'sampul', 'status_artikel', 'tanggal', 'created_by']));
     try {
         if (@$_FILES['sampul']['error'] !== 4) {
             $foto = upload(@$_FILES['sampul'], 'berita/sampul');
@@ -58,7 +58,7 @@ function insertPostingan($data = null)
             $foto = 'sampul.jpg';
         }
         if ($foto != false) {
-            $stmt->execute([$idUser, @$data['judul'], @$data['isi'], @$data['jenis'], $foto, $status_artikel, date('Y-m-d')]);
+            $stmt->execute([$idUser, @$data['judul'], @$data['isi'], @$data['jenis'], $foto, $status_artikel, date('Y-m-d'), $_SESSION['user']->user_id]);
             if ($stmt->rowCount() == 1) {
                 return true;
                 die;
@@ -73,10 +73,11 @@ function insertPostingan($data = null)
 function updateStatusArtikel($data = [])
 {
     global $koneksi;
+    $time = date('Y-m-d H:i:s');
 
-    $res = $koneksi->prepare(dbUpdate('artikel', ['status_artikel'], 'id_artikel'));
+    $res = $koneksi->prepare(dbUpdate('artikel', ['status_artikel', 'modified_by', 'modified_at'], 'id_artikel'));
     try {
-        $res->execute([@$data['post'], @$data['id']]);
+        $res->execute([@$data['post'], $_SESSION['user']->user_id, $time, @$data['id']]);
         return true;
     } catch (PDOException $th) {
         return $th->getMessage();
@@ -86,6 +87,8 @@ function updateStatusArtikel($data = [])
 function updateArtikel($data = [], $id_artikel = null)
 {
     global $koneksi;
+
+    $time = date('Y-m-d H:i:s');
 
     $edit_rows = ['judul', 'isi', 'jenis'];
     $updateData = [@$data['judul'], @$data['isi'], @$data['jenis']];
@@ -98,9 +101,9 @@ function updateArtikel($data = [], $id_artikel = null)
         }
     }
 
-    array_push($updateData, $id_artikel);
-
+    array_push($edit_rows, 'modified_by', 'modified_at');
     $res = $koneksi->prepare(dbUpdate('artikel', $edit_rows, 'id_artikel'));
+    array_push($updateData, $_SESSION['user']->user_id, $time, $id_artikel);
     try {
         $res->execute($updateData);
         return true;

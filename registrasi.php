@@ -12,7 +12,7 @@ if (isset($_POST['daftar'])) {
 <div class="box register-box box-success">
     <?php if (isset($status)) : ?>
         <div class="alert alert-<?= ($status) ? 'success' : 'danger'  ?>">
-            <?= ($status) ? 'Silahkan cek email' : $status ?>
+            <?= ($status) ? 'Silahkan menunggu email' : $status ?>
         </div>
     <?php endif; ?>
     <div class="box-header">

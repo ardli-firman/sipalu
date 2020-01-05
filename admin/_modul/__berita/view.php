@@ -4,14 +4,15 @@ $artikels = getAllArtikel();
 if (isset($_POST['hapus'])) {
     $res = deleteArtikel($_POST['hapus']);
     if ($res === true) {
-        $message = "Berhasil dihapus";
+        $message = "Berhasil menghapus postingan";
         $artikels = getAllArtikel();
         $res = null;
     } else {
-        $message = $res;
+        $message = "Gagal menghapus postingan";
         $artikels = getAllArtikel();
         $res = null;
     }
+    myLog(['id' => $_SESSION['user']->user_id, 'aktivitas' => $message]);
 }
 ?>
 <div class="box box-info">
@@ -40,7 +41,7 @@ if (isset($_POST['hapus'])) {
             <tbody>
                 <?php if ($artikels != false) : ?>
                     <?php $i = 0;
-                        foreach ($artikels as $artikel) : ?>
+                    foreach ($artikels as $artikel) : ?>
                         <tr>
                             <td><?= ++$i ?></td>
                             <td><?= $artikel->judul ?></td>
